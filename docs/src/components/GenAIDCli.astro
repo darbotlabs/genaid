@@ -1,0 +1,15 @@
+---
+import { PackageManagers } from "starlight-package-managers"
+interface Props {
+    args: string
+    comment: string
+}
+const { args, comment } = Astro.props
+---
+<PackageManagers
+    type="dlx"
+    pkg="genaid"
+    args={args}
+    comment={comment}
+    frame="none"
+/>

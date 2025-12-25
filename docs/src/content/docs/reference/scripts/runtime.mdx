@@ -1,0 +1,44 @@
+---
+title: Runtime
+description: GenAID runtime files
+sidebar:
+  order: 80
+keywords: runtime, GenAID, JavaScript, TypeScript
+hero:
+  image:
+    alt: A simple, flat 2D illustration depicts an open package box with basic
+      digital script symbols, small code blocks, and algorithm icons rising from
+      it. Stylized arrows represent data flow around the box. The art uses five
+      solid corporate colors in an 8-bit, geometric, pixelated style. The image
+      is 128x128 pixels, transparent background, no text, no people, and no
+      shading.
+    file: ./runtime.png
+
+---
+
+import { PackageManagers } from "starlight-package-managers"
+
+The GenAID [cli](/genaid/reference/cli) also contains
+a set of helpers written in GenAID. They can be imported
+as the `genaid/runtime` module.
+
+In order to use the runtime, you will need to install GenAID
+in your project.
+
+<PackageManagers pkg="genaid" dev />
+
+## Helpers
+
+- [cast](/genaid/reference/scripts/cast), cast any data to structured outputs
+- [classify](/genaid/reference/scripts/classify), classify text
+- [makeItBetter](/genaid/guides/make-it-better), tell the LLM to improve its result
+- [pipeline](/genaid/guides/transformers-js), access to HuggingFace transformers
+
+## Importing the runtime
+
+The runtime is available as a module. You can import it
+using the following code:
+
+```js
+import { cast } from "genaid/runtime"
+```

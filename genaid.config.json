@@ -1,0 +1,52 @@
+{
+    "$schema": "docs/public/schemas/config.json",
+    "modelAliases": {
+        "gcm": "github:gpt-4o",
+        "release": "github:gpt-4o",
+        "foundry": "azure:gpt-4o",
+        "copilot": "github:gpt-4o",
+        "openwebui": "litellm:gpt-4o",
+        "local": "ollama:phi3"
+    },
+    "envFile": ".env",
+    "modelEncodings": {
+        "azure:gpt-4o_2024-11-20": "gpt-4o",
+        "azure:gpt-4o-mini_2024-07-18": "gpt-4o-mini",
+        "azure:gpt-4_turbo": "gpt-4-turbo",
+        "azure:gpt-35-turbo": "gpt-3.5-turbo",
+        "github:gpt-4o": "gpt-4o",
+        "github:gpt-4o-mini": "gpt-4o-mini",
+        "litellm:gpt-4o": "gpt-4o",
+        "litellm:gpt-4": "gpt-4"
+    },
+    "azure": {
+        "credentialsType": "cli",
+        "managementApiEnabled": true
+    },
+    "github": {
+        "modelsEnabled": true,
+        "copilotEnabled": true
+    },
+    "providers": {
+        "azure": {
+            "enabled": true,
+            "authMethod": "msal"
+        },
+        "github": {
+            "enabled": true,
+            "authMethod": "token"
+        },
+        "openwebui": {
+            "enabled": false,
+            "apiBase": "http://localhost:8080"
+        },
+        "litellm": {
+            "enabled": false,
+            "apiBase": "http://localhost:4000"
+        },
+        "ollama": {
+            "enabled": true,
+            "apiBase": "http://localhost:11434"
+        }
+    }
+}

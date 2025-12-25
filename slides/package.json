@@ -1,0 +1,19 @@
+{
+  "name": "genaid-slides",
+  "version": "1.135.0",
+  "type": "module",
+  "private": true,
+  "npm": {
+    "publish": false
+  },
+  "scripts": {
+    "install:force": "rm yarn.lock && yarn install",
+    "build": "node build.mjs",
+    "dev": "slidev --open"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^51.6.0",
+    "@slidev/theme-default": "^0.25.0",
+    "zx": "^8.5.3"
+  }
+}

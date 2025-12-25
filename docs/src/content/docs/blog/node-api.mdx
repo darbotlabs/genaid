@@ -1,0 +1,64 @@
+---
+title: Node.JS API
+date: 2024-12-10
+authors:
+  - pelikhan
+tags:
+  - sdk
+  - automation
+  - dev
+  - api
+description: Learn about the new API to call genaid for other typescript scripts.
+cover:
+  alt: An 8-bit style illustration showcases a stylized Node.JS logo alongside a
+    geometric TypeScript symbol. Abstract gear and circuit patterns connect the
+    two, representing the integration of GenAID in a corporate environment.
+    The image uses five colors that highlight a digital, clean, and tech-focused
+    aesthetic, remaining iconic and free of human elements or text.
+  image: ./node-api.png
+excerpt: "Introducing a new Node.js API for GenAID: now you can integrate
+  GenAID's functionality directly into your TypeScript workflows (v1.83+).
+  Mimicking the CLI's behavior, the `run` API simplifies tasks like file
+  summarization while maintaining a lightweight and side-effect-free design.
+  Ready to streamline your automation? Check out the documentation for details."
+
+---
+
+import { PackageManagers } from "starlight-package-managers"
+
+import BlogNarration from "../../../components/BlogNarration.astro"
+
+<BlogNarration />
+
+A long standing feature request has been to run GenAID programmatically from other scripts. We are happy to announce that we have released a Node.JS API for GenAID. This API allows you to call GenAID from other TypeScript scripts (v1.83+).
+
+- [Documentation](https://darbotlabs.github.io/genaid/reference/api/)
+
+## Installation
+
+You'll want to add [genaid](https://www.npmjs.com/package/genaid) as a (dev) dependency to your project.
+
+<PackageManagers pkg="genaid" dev />
+
+## The `run` API
+
+The `run` API is meant to mimic the behavior of the GenAID CLI. It takes the same arguments as the CLI and returns the same results. This allows you to call GenAID from other TypeScript scripts.
+
+```js
+import { run } from "genaid/api"
+const results = await run("summarize", ["myfile.txt"])
+```
+
+The result object contains the full list of messages, and additional parsed information like modified files, diagnostics and so forth.
+
+## Don't mess with my process
+
+On the caller side, the [run implementation](https://github.com/darbotlabs/genaid/blob/main/packages/cli/src/api.ts) is a dependency free, side effect free function. It spawns a worker thread where GenAID does the work.
+
+- No global added
+- No package loaded
+- A few hundred `b` of memory used
+
+## Help us improve it!
+
+Obviously this is a first draft and we could do a better job at providing callbacks for progress. Send us your feedback!

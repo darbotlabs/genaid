@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../docs"
+		}
+	],
+	"settings": {
+		"genaid.cli.path": "../packages/cli/built/genaid.cjs"
+	}
+}

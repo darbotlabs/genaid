@@ -1,0 +1,43 @@
+{
+  "name": "genaid-sample",
+  "version": "1.135.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "go": "node ../cli/built/main.js src/sample.ts",
+    "token": "mkdir -p .genaid/tmp; (if test -e /dev/clipboard; then cat /dev/clipboard ; else pbpaste ; fi) > .genaid/tmp/request.txt",
+    "typecheck": "tsc -p src",
+    "test": "node --import tsx --test src/**.test.ts",
+    "test:watch": "node --import tsx --watch --test-name-pattern=run --test src/**.test.ts",
+    "cache:clear": "node ../cli/built/genaid.cjs cache clear",
+    "run:script": "node --trace-deprecation ../cli/built/genaid.cjs run",
+    "test:scripts": "node ../cli/built/genaid.cjs test -rmo",
+    "test:scripts:view": "node ../cli/built/genaid.cjs test view"
+  },
+  "devDependencies": {
+    "@types/diff": "^6.0.0",
+    "@types/http-cache-semantics": "^4.0.4",
+    "@types/node": "^22.15.2",
+    "@types/sarif": "^2.1.7",
+    "@types/turndown": "^5.0.5",
+    "@types/uuid": "^10.0.0",
+    "@types/yauzl": "file:../../third_party/npm/@types-yauzl",
+    "@agentic/calculator": "v7.5.3",
+    "@agentic/core": "v7.5.3",
+    "@agentic/weather": "v7.5.3",
+    "@ast-grep/lang-c": "^0.0.1",
+    "@ast-grep/lang-cpp": "^0.0.1",
+    "@ast-grep/lang-csharp": "^0.0.1",
+    "@ast-grep/lang-python": "^0.0.1",
+    "@azure/identity": "^4.9.1",
+    "@azure/storage-blob": "^12.27.0",
+    "@huggingface/transformers": "3.4.0",
+    "@langchain/core": "^0.3.42",
+    "@langchain/langgraph": "^0.2.57",
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "@tidyjs/tidy": "^2.5.2",
+    "p-all": "^5.0.0",
+    "zod": "^3.24.4",
+    "zod-to-json-schema": "^3.24.5"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "timestamp": "2025-11-07T08:00:20.458Z",
+  "summary": {
+    "totalPackages": 6,
+    "totalDependencies": 161,
+    "versionConflicts": 1,
+    "duplicateCodeFiles": 20
+  },
+  "versionConflicts": [
+    {
+      "dependency": "typescript",
+      "conflicts": [
+        [
+          "cli",
+          "5.8.3"
+        ],
+        [
+          "core",
+          "5.8.3"
+        ],
+        [
+          "vscode",
+          "5.8.3"
+        ],
+        [
+          "web",
+          "^5.8.3"
+        ]
+      ]
+    }
+  ],
+  "largestFiles": [
+    {
+      "file": "total",
+      "lines": 62167
+    },
+    {
+      "file": "packages/core/src/types/prompt_template.d.ts",
+      "lines": 6190
+    },
+    {
+      "file": "packages/core/src/chat.ts",
+      "lines": 1720
+    },
+    {
+      "file": "packages/core/src/promptdom.ts",
+      "lines": 1627
+    },
+    {
+      "file": "packages/core/src/githubclient.ts",
+      "lines": 1605
+    },
+    {
+      "file": "packages/core/src/runpromptcontext.ts",
+      "lines": 1263
+    },
+    {
+      "file": "packages/core/src/openai.ts",
+      "lines": 997
+    },
+    {
+      "file": "packages/cli/src/run.ts",
+      "lines": 943
+    },
+    {
+      "file": "packages/core/src/env.ts",
+      "lines": 852
+    },
+    {
+      "file": "packages/cli/src/server.ts",
+      "lines": 842
+    },
+    {
+      "file": "packages/cli/src/cli.ts",
+      "lines": 772
+    },
+    {
+      "file": "packages/cli/src/nodehost.ts",
+      "lines": 682
+    },
+    {
+      "file": "packages/core/src/textsplitter.ts",
+      "lines": 614
+    },
+    {
+      "file": "packages/cli/src/docker.ts",
+      "lines": 610
+    },
+    {
+      "file": "packages/core/src/anthropic.ts",
+      "lines": 609
+    },
+    {
+      "file": "packages/core/src/pdf.ts",
+      "lines": 585
+    },
+    {
+      "file": "packages/core/src/git.ts",
+      "lines": 573
+    },
+    {
+      "file": "packages/vscode/src/docsnotebook.ts",
+      "lines": 560
+    },
+    {
+      "file": "packages/core/src/vectra/LocalDocumentIndex.ts",
+      "lines": 547
+    },
+    {
+      "file": "packages/core/src/ffmpeg.ts",
+      "lines": 520
+    }
+  ],
+  "bundleSizes": {},
+  "recommendations": [
+    {
+      "type": "dependency",
+      "priority": "high",
+      "title": "Resolve version conflicts",
+      "description": "Found 1 dependencies with version conflicts",
+      "action": "yarn upgrade and align versions across packages"
+    },
+    {
+      "type": "code",
+      "priority": "medium",
+      "title": "Review large files",
+      "description": "Found 20 files with >500 lines",
+      "action": "Consider breaking down large files into smaller modules"
+    }
+  ]
+}

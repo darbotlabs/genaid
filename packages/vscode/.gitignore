@@ -1,0 +1,8 @@
+.vscode-test-web
+dist
+built
+*.vsix
+genaid.cjs
+esbuild.*.html
+genaid.vsix
+genaid.manifest

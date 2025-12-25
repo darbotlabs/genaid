@@ -1,0 +1,43 @@
+{
+  "name": "docs",
+  "type": "module",
+  "private": true,
+  "version": "1.135.0",
+  "license": "MIT",
+  "scripts": {
+    "install:force": "rm yarn.lock && yarn install",
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
+    "check": "astro check",
+    "build": "astro build",
+    "build:asw": "rm -Rf distasw && mkdir distasw && touch distasw/index.html && mkdir distasw/genaid && cp -r dist/* distasw/genaid && node fixllms.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "genai:test": "node ../packages/cli/built/genaid.cjs test src/**/*.md",
+    "genai:frontmatter": "node ../packages/cli/built/genaid.cjs run frontmatter \"src/**/*.{md,mdx}\" --apply-edits",
+    "genai:technical": "for file in \"src/**/*.md\"; do\nnode ../packages/cli/built/genaid.cjs run technical \"$file\" --apply-edits\ndone",
+    "genai:alt-text": "node scripts/image-alt-text.mjs"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/starlight": "^0.34.2",
+    "@types/diff": "^6.0.0",
+    "@types/http-cache-semantics": "^4.0.4",
+    "@types/node": "^22.15.2",
+    "@types/sarif": "^2.1.7",
+    "@types/turndown": "^5.0.5",
+    "@types/uuid": "^10.0.0",
+    "@types/yauzl": "file:../third_party/npm/@types-yauzl",
+    "astro": "^5.7.10",
+    "astro-embed": "^0.9.0",
+    "rehype-mermaid": "^3.0.0",
+    "starlight-blog": "^0.21.0",
+    "starlight-links-validator": "^0.16.0",
+    "starlight-llms-txt": "^0.5.1",
+    "starlight-package-managers": "^0.11.0",
+    "zx": "^8.5.3"
+  },
+  "resolutions": {
+    "marked": "15.0.8"
+  }
+}

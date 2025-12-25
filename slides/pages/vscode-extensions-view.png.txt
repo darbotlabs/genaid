@@ -1,0 +1,2 @@
+Icon representing the GenAID view in Visual Studio Code, 
+located in the activity bar on the left side of the screen.

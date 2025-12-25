@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  genaid:
+    image: genaid:latest
+    container_name: genaid-app
+    ports:
+      - "8003:8003"
+    environment:
+      # Memory configuration
+      - NODE_OPTIONS=--max-old-space-size=3072
+      
+      # Azure Foundry / Azure OpenAI Configuration
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY:-}
+      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT:-}
+      - AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION:-2024-08-01-preview}
+      
+      # Azure Management API (for model listing)
+      - AZURE_OPENAI_SUBSCRIPTION_ID=${AZURE_OPENAI_SUBSCRIPTION_ID:-}
+      - AZURE_OPENAI_RESOURCE_GROUP=${AZURE_OPENAI_RESOURCE_GROUP:-}
+      - AZURE_OPENAI_API_MODELS_TYPE=${AZURE_OPENAI_API_MODELS_TYPE:-openai}
+      
+      # Azure AI Inference (Foundry)
+      - AZURE_AI_INFERENCE_API_KEY=${AZURE_AI_INFERENCE_API_KEY:-}
+      - AZURE_AI_INFERENCE_ENDPOINT=${AZURE_AI_INFERENCE_ENDPOINT:-}
+      
+      # Azure Serverless Models
+      - AZURE_SERVERLESS_MODELS_API_KEY=${AZURE_SERVERLESS_MODELS_API_KEY:-}
+      - AZURE_SERVERLESS_MODELS_ENDPOINT=${AZURE_SERVERLESS_MODELS_ENDPOINT:-}
+      
+      # Azure Authentication Method (for MSAL)
+      # Options: default, cli, env, powershell, devcli, managedidentity, workloadidentity
+      - AZURE_CREDENTIALS_TYPE=${AZURE_CREDENTIALS_TYPE:-cli}
+      
+      # GitHub Models / Copilot
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - GITHUB_MODELS_API_KEY=${GITHUB_MODELS_API_KEY:-}
+      
+      # OpenWebUI / LiteLLM
+      - LITELLM_API_BASE=${LITELLM_API_BASE:-http://host.docker.internal:4000}
+      - LITELLM_API_KEY=${LITELLM_API_KEY:-}
+      - OPENWEBUI_API_BASE=${OPENWEBUI_API_BASE:-http://host.docker.internal:8080}
+      - OPENWEBUI_API_KEY=${OPENWEBUI_API_KEY:-}
+      
+      # OpenAI (fallback)
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      
+      # Other providers
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      
+    volumes:
+      # Mount workspace for scripts
+      - ./workspace:/workspace
+      # Mount Azure CLI credentials (for azcli auth)
+      - ~/.azure:/root/.azure:ro
+      # Mount GitHub CLI credentials
+      - ~/.config/gh:/root/.config/gh:ro
+      # Mount config file
+      - ./genaid.config.json:/app/genaid.config.json:ro
+      
+    mem_limit: 4g
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - genaid-network
+
+networks:
+  genaid-network:
+    driver: bridge

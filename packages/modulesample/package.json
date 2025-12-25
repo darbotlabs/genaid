@@ -1,0 +1,10 @@
+{
+  "name": "genaid-modulesample",
+  "type": "module",
+  "scripts": {
+    "genai": "node ../cli/built/genaid.cjs run",
+    "genaid": "node ../cli/built/genaid.cjs run",
+    "test": "yarn genaid poem-js-module"
+  },
+  "version": "1.135.0"
+}
