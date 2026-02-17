@@ -1,0 +1,516 @@
+openapi: 3.0.3
+info:
+  title: GenAID API
+  description: |
+    Enhanced API for GenAID framework supporting script execution, streaming, 
+    webhooks, batch processing, and agent orchestration.
+  version: 1.135.0
+  contact:
+    name: DarbotLabs
+    url: https://github.com/darbotlabs/genaid
+
+servers:
+  - url: http://localhost:8003/api
+    description: Local development server
+  - url: https://api.genaid.dev
+    description: Production API
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /run:
+    post:
+      summary: Execute a GenAID script
+      description: Runs a script with given files and options
+      tags:
+        - Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scriptId
+              properties:
+                scriptId:
+                  type: string
+                  description: Script identifier or file path
+                files:
+                  type: array
+                  items:
+                    type: string
+                  description: List of file paths to process
+                envVars:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Environment variables
+                options:
+                  type: object
+                  description: Script execution options
+      responses:
+        '200':
+          description: Successful execution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationResult'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server error
+
+  /stream:
+    post:
+      summary: Stream script execution
+      description: Streams real-time updates during script execution
+      tags:
+        - Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scriptId
+              properties:
+                scriptId:
+                  type: string
+                files:
+                  type: array
+                  items:
+                    type: string
+                envVars:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: Server-sent events stream
+          content:
+            text/event-stream:
+              schema:
+                type: string
+
+  /webhook:
+    post:
+      summary: Execute script with webhook notification
+      description: Runs script asynchronously and sends results to webhook
+      tags:
+        - Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scriptId
+                - webhook
+              properties:
+                scriptId:
+                  type: string
+                files:
+                  type: array
+                  items:
+                    type: string
+                envVars:
+                  type: object
+                  additionalProperties:
+                    type: string
+                webhook:
+                  $ref: '#/components/schemas/WebhookConfig'
+      responses:
+        '202':
+          description: Job accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                  webhook:
+                    type: string
+                  status:
+                    type: string
+
+  /batch:
+    post:
+      summary: Execute multiple scripts
+      description: Batch execution of multiple scripts with progress tracking
+      tags:
+        - Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - jobs
+              properties:
+                jobs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      scriptId:
+                        type: string
+                      files:
+                        type: array
+                        items:
+                          type: string
+                      envVars:
+                        type: object
+                parallel:
+                  type: boolean
+                  default: false
+                maxConcurrent:
+                  type: integer
+                  default: 5
+      responses:
+        '200':
+          description: Batch execution results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchResult'
+
+  /jobs/{jobId}:
+    get:
+      summary: Get job status
+      description: Retrieve status and results of an async job
+      tags:
+        - Jobs
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+        '404':
+          description: Job not found
+
+  /agents/swarm:
+    post:
+      summary: Execute agent swarm
+      description: Orchestrate multiple agents to solve complex tasks
+      tags:
+        - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - task
+              properties:
+                task:
+                  type: string
+                  description: Task to accomplish
+                agents:
+                  type: array
+                  items:
+                    type: string
+                  description: Agent names to use
+                strategy:
+                  type: string
+                  enum: [sequential, parallel, adaptive]
+                  default: adaptive
+      responses:
+        '200':
+          description: Swarm execution result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwarmResult'
+
+  /visualize/workflow:
+    post:
+      summary: Generate workflow diagram
+      description: Create Mermaid workflow visualization
+      tags:
+        - Visualization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowRequest'
+      responses:
+        '200':
+          description: Mermaid diagram
+          content:
+            text/markdown:
+              schema:
+                type: string
+
+  /jupyter/convert:
+    post:
+      summary: Convert between formats
+      description: Convert GenAID scripts to Jupyter notebooks and vice versa
+      tags:
+        - Jupyter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+                - format
+              properties:
+                content:
+                  type: string
+                format:
+                  type: string
+                  enum: [to-notebook, to-script]
+                language:
+                  type: string
+                  default: python
+      responses:
+        '200':
+          description: Converted content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+                  format:
+                    type: string
+
+  /cards/create:
+    post:
+      summary: Create adaptive card
+      description: Generate Microsoft Adaptive Card from data
+      tags:
+        - Cards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                title:
+                  type: string
+                subtitle:
+                  type: string
+                imageUrl:
+                  type: string
+      responses:
+        '200':
+          description: Adaptive card JSON
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdaptiveCard'
+
+  /wiki/generate:
+    post:
+      summary: Generate Jekyll wiki
+      description: Create Jekyll documentation site
+      tags:
+        - Wiki
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - pages
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                pages:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/JekyllPage'
+      responses:
+        '200':
+          description: Wiki files
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  config:
+                    type: string
+                  pages:
+                    type: array
+                    items:
+                      type: object
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    GenerationResult:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        text:
+          type: string
+        finishReason:
+          type: string
+        error:
+          type: string
+        stats:
+          type: object
+
+    WebhookConfig:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+        method:
+          type: string
+          enum: [POST, PUT]
+          default: POST
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+        retryAttempts:
+          type: integer
+          default: 3
+        retryDelay:
+          type: integer
+          default: 1000
+
+    BatchResult:
+      type: object
+      properties:
+        scriptId:
+          type: string
+        result:
+          $ref: '#/components/schemas/GenerationResult'
+        error:
+          type: string
+
+    JobStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        result:
+          $ref: '#/components/schemas/GenerationResult'
+        error:
+          type: string
+        createdAt:
+          type: integer
+        updatedAt:
+          type: integer
+
+    SwarmResult:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        taskBreakdown:
+          type: array
+          items:
+            type: object
+        agentAssignments:
+          type: object
+        results:
+          type: object
+
+    WorkflowRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        nodes:
+          type: array
+          items:
+            type: object
+        edges:
+          type: array
+          items:
+            type: object
+
+    AdaptiveCard:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [AdaptiveCard]
+        version:
+          type: string
+        body:
+          type: array
+          items:
+            type: object
+
+    JekyllPage:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        layout:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+
+tags:
+  - name: Execution
+    description: Script execution endpoints
+  - name: Jobs
+    description: Async job management
+  - name: Agents
+    description: Agent orchestration
+  - name: Visualization
+    description: Diagram generation
+  - name: Jupyter
+    description: Notebook operations
+  - name: Cards
+    description: Adaptive Cards
+  - name: Wiki
+    description: Documentation generation
