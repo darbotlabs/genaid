@@ -100,7 +100,7 @@ export async function runWithWebhook(
         signal?: AbortSignal
     }
 ): Promise<{ jobId: string; webhook: string }> {
-    const jobId = `job_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    const jobId = `job_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
 
     // Run script asynchronously
     ;(async () => {
@@ -260,7 +260,7 @@ export class JobManager {
     >()
 
     createJob(scriptId: string): string {
-        const jobId = `job_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+        const jobId = `job_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
         this.jobs.set(jobId, {
             status: "pending",
             createdAt: Date.now(),
@@ -378,7 +378,7 @@ export class APIAuth {
     private keys = new Map<string, { name: string; scopes: string[]; createdAt: number }>()
 
     generateKey(name: string, scopes: string[] = ["read", "write"]): string {
-        const key = `gk_${Date.now()}_${Math.random().toString(36).substr(2, 32)}`
+        const key = `gk_${Date.now()}_${Math.random().toString(36).substring(2, 34)}`
         this.keys.set(key, {
             name,
             scopes,

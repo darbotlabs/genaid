@@ -134,8 +134,7 @@ script({
 // Create a notebook for interactive data exploration
 const notebook = createNotebook("python", "Python 3 (GenAID)")
 
-addMarkdownCell(notebook, `# Interactive Data Exploration
-Generated: ${new Date().toLocaleString()}`)
+addMarkdownCell(notebook, "# Interactive Data Exploration\\nGenerated: " + new Date().toLocaleString())
 
 def("DATASET", await workspace.readText("sales.csv"))
 

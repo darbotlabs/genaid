@@ -203,7 +203,8 @@ for (const file of sourceFiles.files) {
 
 // Save documentation
 for (const page of site.pages) {
-    const filename = \`docs/\${page.frontmatter.permalink.replace(/\//g, "-")}.md\`
+    const permalink = page.frontmatter.permalink || "/" + file.split("/").pop().replace(/\.(ts|js)$/, "")
+    const filename = \`docs/\${permalink.replace(/\//g, "-")}.md\`
     await workspace.writeText(filename, pageToMarkdown(page))
 }
 ```
@@ -373,8 +374,14 @@ site.config.markdown = "kramdown"
 // Generate all files
 await workspace.writeText("_config.yml", generateConfigYML(site))
 
+// Helper function to create URL-friendly slug
+function slugify(text) {
+    return text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
+}
+
 for (const page of site.pages) {
-    const path = \`\${page.frontmatter.permalink || slugify(page.frontmatter.title)}.md\`
+    const permalink = page.frontmatter.permalink || slugify(page.frontmatter.title)
+    const path = \`\${permalink}.md\`
     await workspace.writeText(path, pageToMarkdown(page))
 }
 
