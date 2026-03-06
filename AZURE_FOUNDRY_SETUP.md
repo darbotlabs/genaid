@@ -313,7 +313,7 @@ docker compose logs -f genaid
 ```
 
 ### 2. Access the Web Interface
-- LAN: http://10.1.8.69:8003/
+- LAN: http://<YOUR_LAN_IP>:8003/
 - Local: http://localhost:8003/
 
 ### 3. Using Azure CLI from Container
@@ -388,7 +388,7 @@ docker exec genaid-app ls -la /root/.config/gh
 2. ✅ Set up environment variables in `.env`
 3. ✅ Deploy with Docker Compose
 4. ✅ Test connectivity with sample scripts
-5. ✅ Explore the web interface at http://10.1.8.69:8003/
+5. Explore the web interface at http://<YOUR_LAN_IP>:8003/
 
 For more information, see:
 - [GenAID Documentation](https://darbotlabs.github.io/genaid/)

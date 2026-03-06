@@ -53,7 +53,7 @@ docker compose ps
 
 Open your browser:
 - **Local:** http://localhost:8003/
-- **LAN:** http://10.1.8.69:8003/
+- **LAN:** http://<YOUR_LAN_IP>:8003/
 
 ## 🔐 Authentication Methods
 

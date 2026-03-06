@@ -65,7 +65,7 @@
 # Already running!
 docker ps | grep genaid-app
 
-# Access: http://10.1.8.69:8003/ or http://localhost:8003/
+# Access: http://<YOUR_LAN_IP>:8003/ or http://localhost:8003/
 ```
 
 ### Option 2: Docker Compose (Recommended)
@@ -117,7 +117,7 @@ docker compose up -d
 ```
 
 ### 3. Access the Interface
-- **LAN:** http://10.1.8.69:8003/
+- **LAN:** http://<YOUR_LAN_IP>:8003/
 - **Local:** http://localhost:8003/
 
 ### 4. Test the Configuration
@@ -302,7 +302,7 @@ $`Summarize results`
 
 ## 🔗 Important Links
 
-- **Web Interface:** http://10.1.8.69:8003/
+- **Web Interface:** http://<YOUR_LAN_IP>:8003/
 - **Azure Portal:** https://portal.azure.com
 - **GitHub Tokens:** https://github.com/settings/tokens
 - **GenAID Docs:** https://darbotlabs.github.io/genaid/

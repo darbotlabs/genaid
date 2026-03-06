@@ -2,7 +2,7 @@
 
 ## Accessing the Application
 
-**LAN Access:** http://10.1.8.69:8003/  
+**LAN Access:** http://<YOUR_LAN_IP>:8003/  
 **Local Access:** http://localhost:8003/
 
 ## What is GenAID?
@@ -94,7 +94,7 @@ docker start genaid-app
 
 ### Blank UI
 - Check browser console (F12) for JavaScript errors
-- Verify http://10.1.8.69:8003/built/web.mjs loads successfully
+- Verify http://<YOUR_LAN_IP>:8003/built/web.mjs loads successfully
 - Clear browser cache and reload
 
 ### Connection Issues

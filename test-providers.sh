@@ -123,7 +123,7 @@ echo
 echo "Container Status: $(docker inspect -f '{{.State.Status}}' genaid-app)"
 echo "Access URLs:"
 echo "  - Local: http://localhost:8003/"
-echo "  - LAN:   http://10.1.8.69:8003/"
+echo "  - LAN:   http://<YOUR_LAN_IP>:8003/"
 echo
 echo "Next Steps:"
 echo "  1. Configure authentication (run setup scripts)"
