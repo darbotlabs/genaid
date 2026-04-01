@@ -28,7 +28,7 @@
     "@types/turndown": "^5.0.5",
     "@types/uuid": "^10.0.0",
     "@types/yauzl": "file:../third_party/npm/@types-yauzl",
-    "astro": "^5.15.9",
+    "astro": "^5.18.1",
     "astro-embed": "^0.9.0",
     "rehype-mermaid": "^3.0.0",
     "starlight-blog": "^0.21.0",
