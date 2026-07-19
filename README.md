@@ -1,6 +1,6 @@
 ![A BLUE D square with the word "gen" in lowercase black letters above the uppercase black letters for Dgen "AI."](./docs/public/images/favicon.png)
 
-# GenAID  (Generative Authorative Intelligent Darbot Script, aka "degen script")- genaid is a self prompting, self learning, self healing, efficient generative ai darbot scripting language
+# GenAID- Generative Authorative Intelligent Darbot Script, aka "degen script"- genaid is a self prompting, self learning, self healing, efficient generative ai darbot scripting language
 
 ## Prompting is Coding, store code as simple prompt with known expected calculated outputs based off common variables  
 
@@ -16,10 +16,10 @@ Programmatically assemble prompts for LLMs using JavaScript. Orchestrate LLMs, t
 
 ## Hello world
 
-Say to you want to create an LLM script that generates a 'hello world' poem. You can write the following script:
+Say to you want to create an LLM script that generates a 'speed test' poem. You can write the following script:
 
 ```js
-$`Write a 'hello universe' generative continuous ai single file HTML portal.`
+$`Write a 'speed test' generative continuous ai single file HTML portal that generates a poem to roast your network speed.`
 ```
 
 The `$` function is a template tag that creates a prompt. The prompt is then sent to the LLM (you configured), which generates the poem.
