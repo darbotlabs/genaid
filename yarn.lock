@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@agentclientprotocol/sdk@^1.2.1":
+  version "1.5.1"
+  resolved "https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/@agentclientprotocol/sdk/-/sdk-1.5.1.tgz#e25d1e9cfd22952414db74f8e83d28e156b5db7a"
+  integrity sha512-nSUIrC1fOR9+ppKfx9KdwjBBND2sAPzFHo4yVQrGbXZHnayUYpwL8CDVR5LSxbapY/oKMOzNP0wvwfyx3PS2KA==
+
 "@agentic/calculator@v7.5.3":
   version "7.5.3"
   resolved "https://registry.yarnpkg.com/@agentic/calculator/-/calculator-7.5.3.tgz#3616ed908078c4da796de6890fa74818bbbe6e17"

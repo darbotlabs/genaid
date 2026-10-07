@@ -563,6 +563,19 @@ Options:
   -h, --help                display help for command
 ```
 
+## `acp`
+
+```
+Usage: genaid acp [options]
+
+Starts an Agent Client Protocol server over newline-delimited JSON stdio
+
+Options:
+  --script <string>  GenAID script to execute for ACP prompt turns
+  --model <string>   Model override for the ACP script runtime
+  -h, --help         display help for command
+```
+
 ## `parse`
 
 ```

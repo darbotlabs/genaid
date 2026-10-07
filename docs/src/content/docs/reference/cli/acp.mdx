@@ -1,0 +1,43 @@
+---
+title: Agent Client Protocol
+description: Run GenAID as an ACP v1 agent over stdio.
+sidebar:
+    order: 3
+---
+
+Start GenAID as an Agent Client Protocol (ACP) v1 agent using newline-delimited
+JSON over standard input and output:
+
+```bash
+npx genaid acp --script path/to/agent.genai.mts
+```
+
+The `--script` value is the GenAID script identifier used for each prompt turn.
+Use `--model` to override the model configured by that script:
+
+```bash
+npx genaid acp --script path/to/agent.genai.mts --model openai:gpt-4.1
+```
+
+The server supports ACP initialization, session creation, loading, listing,
+resuming, closing, deletion, modes, prompt streaming, cancellation, and
+newline-delimited stdio framing. Text and resource-link prompt blocks are
+supported. Image, audio, embedded-resource, and MCP server attachment requests
+are rejected unless a future runtime explicitly enables them.
+
+## Transport support
+
+Only the stdio transport is implemented today. The agent core is
+transport-agnostic, so the Streamable HTTP and WebSocket transports can be added
+without changing session, streaming, or cancellation behavior.
+
+| Transport             | Status          |
+| --------------------- | --------------- |
+| stdio (newline JSON)  | Supported       |
+| Streamable HTTP + SSE | Not implemented |
+| WebSocket             | Not implemented |
+
+Because stdio inherits the trust boundary of the process that spawns it, no
+network authentication is applied. A future HTTP transport must add
+authentication, origin validation, and TLS before it is exposed beyond
+`localhost`.

@@ -72,6 +72,7 @@ import { logPerformance } from "../../core/src/performance"
 import { setConsoleColors } from "../../core/src/consolecolor"
 import { listRuns } from "./runs"
 import { startMcpServer } from "./mcpserver"
+import { createScriptAcpRuntime, startAcpServer } from "./acp"
 import { error } from "./log"
 import { DEBUG_CATEGORIES } from "../../core/src/dbg"
 
@@ -584,6 +585,24 @@ export async function cli() {
         )
         .action(startMcpServer)
     addRemoteOptions(mcp) // Add remote options to the command
+
+    const acp = program
+        .command("acp")
+        .description(
+            "Starts an Agent Client Protocol server over newline-delimited JSON stdio"
+        )
+        .requiredOption(
+            "--script <string>",
+            "GenAID script to execute for ACP prompt turns"
+        )
+        .option("--model <string>", "Model override for the ACP script runtime")
+        .action(async (options) => {
+            await startAcpServer({
+                runtime: createScriptAcpRuntime(options.script, {
+                    model: options.model,
+                }),
+            })
+        })
 
     // Define 'parse' command group for parsing tasks
     const parser = program

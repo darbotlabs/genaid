@@ -1,11 +1,14 @@
 {
     "extends": "../../tsconfig-base.json",
     "compilerOptions": {
+        "composite": false,
+        "declaration": false,
+        "declarationMap": false,
+        "emitDeclarationOnly": false,
+        "incremental": false,
+        "noEmit": true,
         "types": ["node"],
-        "declarationDir": "../built/types",
-        "outDir": "../built",
-        "skipLibCheck": true,
-        "emitDeclarationOnly": true
+        "skipLibCheck": true
     },
     "include": [".", "../../core/src/types/*.d.ts", "../../core/src/stdio.ts"]
 }
