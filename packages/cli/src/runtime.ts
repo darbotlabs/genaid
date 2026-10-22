@@ -263,10 +263,12 @@ export async function markdownifyPdf(
     } = options || {}
 
     // extract text and render pages as images
-    const { pages, images = [] } = await parsers.PDF(file, {
+    const parsed = await parsers.PDF(file, {
         ...rest,
         renderAsImage: true,
     })
+    if (!parsed) throw new Error("failed to parse PDF")
+    const { pages, images = [] } = parsed
     const markdowns: string[] = []
     for (let i = 0; i < pages.length; ++i) {
         const page = pages[i]
