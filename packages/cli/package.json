@@ -152,8 +152,8 @@
     "zx": "^8.5.3"
   },
   "scripts": {
-    "compile:runtime:declarations": "node node_modules/typescript/bin/tsc src/runtime.ts --skipLibCheck --outDir built --declaration --target es2020 --moduleResolution node --module esnext --emitDeclarationOnly",
-    "compile:runtime:code": "node node_modules/typescript/bin/tsc src/runtime.ts --skipLibCheck --outDir built --target es2020 --moduleResolution node --module esnext --removeComments true",
+    "compile:runtime:declarations": "tsc src/runtime.ts --skipLibCheck --outDir built --declaration --target es2020 --moduleResolution bundler --module esnext --emitDeclarationOnly",
+    "compile:runtime:code": "tsc src/runtime.ts --skipLibCheck --outDir built --target es2020 --moduleResolution bundler --module esnext --removeComments true",
     "compile:runtime": "yarn compile:runtime:declarations && yarn compile:runtime:code && mv built/runtime.js built/runtime.mjs",
     "compile:api": "./node_modules/.bin/esbuild src/api.ts --outfile=built/api.mjs",
     "compile:cli": "node build.mjs",

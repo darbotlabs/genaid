@@ -1,9 +1,8 @@
 // GenLogging - FastAPI-style comprehensive logging
+export type { LogEntry, LoggerConfig } from "./genlogging"
 export {
     GenLogger,
     LogLevel,
-    LogEntry,
-    LoggerConfig,
     LoggerFactory,
     getLogger,
     configureLogging,
@@ -11,11 +10,13 @@ export {
 } from "./genlogging"
 
 // Performance monitoring
-export {
-    performanceMonitor,
+export type {
     PerformanceMonitor,
     PerformanceMetric,
     PerformanceProfile,
+} from "./performance"
+export {
+    performanceMonitor,
     withTiming,
     profile,
     mark,
@@ -30,10 +31,12 @@ export { genaidDebug } from "./debug"
 export { consoleLogFormat } from "./logging"
 
 // Adaptive Cards
-export {
+export type {
     AdaptiveCard,
     AdaptiveCardElement,
     AdaptiveCardAction,
+} from "./adaptivecards"
+export {
     createAdaptiveCard,
     addTextBlock,
     addImage,
@@ -48,11 +51,13 @@ export {
 } from "./adaptivecards"
 
 // Jupyter Notebooks
-export {
+export type {
     JupyterNotebook,
     JupyterCell,
     JupyterOutput,
     JupyterMetadata,
+} from "./jupyter"
+export {
     parseNotebook,
     notebookToJSON,
     createNotebook,
@@ -68,10 +73,8 @@ export {
 } from "./jupyter"
 
 // Workflow Visualization
+export type { WorkflowNode, WorkflowEdge, Workflow } from "./workflow"
 export {
-    WorkflowNode,
-    WorkflowEdge,
-    Workflow,
     createWorkflow,
     addNode,
     addEdge,
@@ -84,11 +87,13 @@ export {
 } from "./workflow"
 
 // Jekyll Wiki Integration
-export {
+export type {
     JekyllFrontMatter,
     JekyllPage,
     JekyllSite,
     JekyllConfig,
+} from "./jekyll"
+export {
     createJekyllPage,
     frontmatterToYAML,
     pageToMarkdown,
