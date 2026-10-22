@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - name: enable yarn 1.22
+        run: corepack enable
+      - name: install
+        run: yarn install --frozen-lockfile
+      - name: install docs and slides lockfiles
+        run: |
+          yarn --cwd docs install --frozen-lockfile
+          yarn --cwd slides install --frozen-lockfile
+      - name: build
+        run: |
+          yarn compile:ext
+          yarn compile:cli
+      - name: typecheck (non-blocking)
+        # Existing errors: core 62, cli 60, vscode 382, web 2 under TypeScript 7.0.2
+        # with optional dependencies skipped (.yarnrc --ignore-optional).
+        # Left non-blocking until that baseline is cleared.
+        continue-on-error: true
+        run: |
+          set +e
+          for pkg in core cli vscode web; do
+            echo "=== packages/$pkg ==="
+            yarn --cwd "packages/$pkg" typecheck
+            echo "packages/$pkg exit $?"
+          done
