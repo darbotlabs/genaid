@@ -15,5 +15,8 @@
     "@slidev/cli": "^51.6.0",
     "@slidev/theme-default": "^0.25.0",
     "zx": "^8.8.5"
+  },
+  "resolutions": {
+    "katex": "0.18.2"
   }
 }
