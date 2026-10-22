@@ -31,9 +31,9 @@ jobs:
         # Left non-blocking until that baseline is cleared.
         continue-on-error: true
         run: |
-          set +e
+          status=0
           for pkg in core cli vscode web; do
             echo "=== packages/$pkg ==="
-            yarn --cwd "packages/$pkg" typecheck
-            echo "packages/$pkg exit $?"
+            yarn --cwd "packages/$pkg" typecheck || status=1
           done
+          exit "$status"
