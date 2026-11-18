@@ -743,10 +743,20 @@
   dependencies:
     "@azure/msal-common" "16.4.1"
 
+"@azure/msal-common@15.17.0":
+  version "15.17.0"
+  resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-15.17.0.tgz#ae3c03378c852642b1c9a303380e945c2b897f02"
+  integrity sha512-VQ5/gTLFADkwue+FohVuCqlzFPUq4xSrX8jeZe+iwZuY6moliNC8xt86qPVNYdtbQfELDf2Nu6LI+demFPHGgw==
+
 "@azure/msal-common@15.6.0":
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-15.6.0.tgz#0764d6446eeff3970221995e25f265fdb218da66"
   integrity sha512-EotmBz42apYGjqiIV9rDUdptaMptpTn4TdGf3JfjLvFvinSe9BJ6ywU92K9ky+t/b0ghbeTSe9RfqlgLh8f2jA==
+
+"@azure/msal-common@16.13.0":
+  version "16.13.0"
+  resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-16.13.0.tgz#62e424c6b21e143e8ef4374a64dbf8772dfe1a07"
+  integrity sha512-rOAy0KUcyBbdwVJ+f3uPpthXatFLLZN+/KWAsTLzk1aB23Xl9DRmmXYwSvBFOZyXj4jUQQ5FKxxRkhAFW1fOow==
 
 "@azure/msal-common@16.4.1":
   version "16.4.1"
@@ -754,22 +764,21 @@
   integrity sha512-Bl8f+w37xkXsYh7QRkAKCFGYtWMYuOVO7Lv+BxILrvGz3HbIEF22Pt0ugyj0QPOl6NLrHcnNUQ9yeew98P/5iw==
 
 "@azure/msal-node@^3.5.0":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@azure/msal-node/-/msal-node-3.5.3.tgz#02f7a2344a2c2994354a0cec125b9ef9a8e7109b"
-  integrity sha512-c5mifzHX5mwm5JqMIlURUyp6LEEdKF1a8lmcNRLBo0lD7zpSYPHupa4jHyhJyg9ccLwszLguZJdk2h3ngnXwNw==
+  version "3.8.10"
+  resolved "https://registry.yarnpkg.com/@azure/msal-node/-/msal-node-3.8.10.tgz#44c900905b023e63146cead2999720f0906c74ca"
+  integrity sha512-0Hz7Kx4hs70KZWep/Rd7aw/qOLUF92wUOhn7ZsOuB5xNR/06NL1E2RAI9+UKH1FtvN8nD6mFjH7UKSjv6vOWvQ==
   dependencies:
-    "@azure/msal-common" "15.6.0"
+    "@azure/msal-common" "15.17.0"
     jsonwebtoken "^9.0.0"
     uuid "^8.3.0"
 
 "@azure/msal-node@^5.1.0":
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/@azure/msal-node/-/msal-node-5.1.2.tgz#15eaad6959966b2a88234fb56892d7b8d6af9d62"
-  integrity sha512-DoeSJ9U5KPAIZoHsPywvfEj2MhBniQe0+FSpjLUTdWoIkI999GB5USkW6nNEHnIaLVxROHXvprWA1KzdS1VQ4A==
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/@azure/msal-node/-/msal-node-5.6.0.tgz#8cbfeff021b6d2f3d064a3afb82262ad985e8434"
+  integrity sha512-uFY9NxrWHw8PwZx7gAX6PDn+9vdfS05+levc/kwkx77IkjfaldnQbbcQzzDIZ5Hq5Zdr6/z92oAIoRWKp6MnOA==
   dependencies:
-    "@azure/msal-common" "16.4.1"
+    "@azure/msal-common" "16.13.0"
     jsonwebtoken "^9.0.0"
-    uuid "^8.3.0"
 
 "@azure/search-documents@^12.1.0":
   version "12.1.0"
@@ -10319,14 +10328,14 @@ undici-types@~6.21.0:
   integrity sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==
 
 undici@^6.19.5:
-  version "6.29.0"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-6.29.0.tgz#140fa16e337ac706d6ff12f03fbe5c4357e5f9a3"
-  integrity sha512-R+RODBqp6i2pPflGdq+xIOUkl+RNfGgHwoinecKu/JCuf2uO06cOKoDbI2P7Dn6KcswdKwrczbU6IYJ6K8X+wg==
+  version "6.29.1"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-6.29.1.tgz#a3317c5df0236e0633727d9a7bd4f7ed195d8575"
+  integrity sha512-EvRlUt/QqAEvXdQeRMYUfwOQsfzpDztykrG2owGEE/rBOBoYv9uF39ZzsNDh4lTFHhTr2XOZjKkYgueD12ZmGA==
 
 undici@^7.19.0:
-  version "7.30.0"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-7.30.0.tgz#64a947266eb7e21dbeac8b99f8720feef308bbe0"
-  integrity sha512-dkrQXeHSaoamnItlYbmzG0wFYrM0ZwDxCIg0A7aKjTyyhh9svRzCNFEzV+Vm05/yehjCzjDZ31KXfGEjYSztDQ==
+  version "7.30.1"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-7.30.1.tgz#360b3de104b94abc52729aa1a4a07e027aa71f73"
+  integrity sha512-03KrMbjIFDWQR5RNPrSw3bd1r12JpyFQl9/yxjUbJtqkjmllqC5lFjZh6ujeuJCKr8EOQvRW872Oy/az+nLYxg==
 
 unicorn-magic@^0.1.0:
   version "0.1.0"
