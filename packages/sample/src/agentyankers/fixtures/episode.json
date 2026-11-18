@@ -1,0 +1,276 @@
+{
+    "schema_version": "agentyankers/v1",
+    "episode_id": "ep-pretzel-parley",
+    "title": "The Last Pretzel",
+    "limit": 3,
+    "premise": {
+        "schema_version": "agentyankers/v1",
+        "premise_id": "prem-pretzel-parley",
+        "title": "The Last Pretzel",
+        "logline": "Two agents call opted-in night staff to negotiate custody of the last pretzel in a break-room machine.",
+        "tone": "deadpan adult workplace comedy",
+        "constraints": "Beats are an outline, not lines to read. Improvise from the mark's replies. Play the recording disclosure before any improvisation. Marks are opted-in adults. Do not use phone numbers.",
+        "target_duration_seconds": 180,
+        "beats": [
+            {
+                "schema_version": "agentyankers/v1",
+                "beat_id": "beat-cold-open",
+                "intent": "setup",
+                "outline": "The caller treats the last pretzel as a labor dispute and asks who can release it."
+            },
+            {
+                "schema_version": "agentyankers/v1",
+                "beat_id": "beat-policy",
+                "intent": "escalate",
+                "outline": "When the mark cites policy, the caller asks the policy to join the call."
+            },
+            {
+                "schema_version": "agentyankers/v1",
+                "beat_id": "beat-button",
+                "intent": "button",
+                "outline": "Leave the pretzel unresolved and thank the mark for the paperwork."
+            }
+        ]
+    },
+    "host": {
+        "schema_version": "agentyankers/v1",
+        "agent_name": "Patsy",
+        "role": "host",
+        "persona_prompt": "Patsy hosts AgentYankers. Dry, adult, and brief. Patsy sets up the clip and does not read a script.",
+        "personaplex_speaker": "NATF2.pt",
+        "voice": {
+            "schema_version": "agentyankers/v1",
+            "voice_id": "host-patsy",
+            "library": "genaid-voices",
+            "provider": "vibevoice",
+            "relative_path": "hosts/patsy.wav"
+        }
+    },
+    "marks": [
+        {
+            "schema_version": "agentyankers/v1",
+            "mark_id": "mark-night-desk",
+            "display_name": "Night Desk",
+            "kind": "person",
+            "opted_in": true,
+            "consent": {
+                "schema_version": "agentyankers/v1",
+                "opted_in": true,
+                "consent_id": "cons-night-desk",
+                "scope": "call_and_publish",
+                "disclosure_accepted": true,
+                "consented_at": "2026-04-01T00:00:00Z"
+            },
+            "contact_ref": "room:night-desk",
+            "notes": "Fictional night clerk. No phone number.",
+            "tags": ["overnight"]
+        },
+        {
+            "schema_version": "agentyankers/v1",
+            "mark_id": "mark-vending-pal",
+            "display_name": "Vending Pal",
+            "kind": "agent",
+            "opted_in": true,
+            "consent": {
+                "schema_version": "agentyankers/v1",
+                "opted_in": true,
+                "consent_id": "cons-vending-pal",
+                "scope": "call_and_publish",
+                "disclosure_accepted": true,
+                "consented_at": "2026-04-01T00:00:00Z"
+            },
+            "contact_ref": "agent:vending-pal",
+            "notes": "Fictional break-room agent.",
+            "tags": ["break-room"]
+        },
+        {
+            "schema_version": "agentyankers/v1",
+            "mark_id": "mark-glen-books",
+            "display_name": "Glen Books",
+            "kind": "person",
+            "opted_in": true,
+            "consent": {
+                "schema_version": "agentyankers/v1",
+                "opted_in": true,
+                "consent_id": "cons-glen-books",
+                "scope": "call",
+                "disclosure_accepted": true,
+                "consented_at": "2026-04-02T00:00:00Z"
+            },
+            "contact_ref": "lk-identity:glen-books",
+            "notes": "Opted in for a call only.",
+            "tags": ["accounting"]
+        },
+        {
+            "schema_version": "agentyankers/v1",
+            "mark_id": "mark-switchboard",
+            "display_name": "Unlisted Switchboard",
+            "kind": "agent",
+            "opted_in": false,
+            "consent": {
+                "schema_version": "agentyankers/v1",
+                "opted_in": false,
+                "consent_id": "cons-switchboard",
+                "scope": "none",
+                "disclosure_accepted": false
+            },
+            "contact_ref": "agent:switchboard",
+            "notes": "Did not opt in.",
+            "tags": ["unlisted"]
+        }
+    ],
+    "sessions": [
+        {
+            "schema_version": "agentyankers/v1",
+            "session_id": "call-pretzel-mox",
+            "premise_id": "prem-pretzel-parley",
+            "agent_name": "Mox",
+            "mark_id": "mark-night-desk",
+            "status": "recorded",
+            "disclosure_played": true,
+            "livekit": {
+                "schema_version": "agentyankers/v1",
+                "room_name": "pretzel-night-desk",
+                "agent_identity": "Mox",
+                "mark_identity": "room:night-desk",
+                "url_env": "LIVEKIT_URL"
+            },
+            "personaplex": {
+                "schema_version": "agentyankers/v1",
+                "text_prompt": "Mox improvises from the pretzel premise. The beats are an outline, not a script.",
+                "speaker_name": "VARF1.pt",
+                "response_tail_seconds": 1.5,
+                "sample_rate": 24000
+            },
+            "consent_snapshot": {
+                "schema_version": "agentyankers/v1",
+                "opted_in": true,
+                "consent_id": "cons-night-desk",
+                "scope": "call_and_publish",
+                "disclosure_accepted": true,
+                "consented_at": "2026-04-01T00:00:00Z"
+            },
+            "recordings": [
+                {
+                    "schema_version": "agentyankers/v1",
+                    "ref_id": "rec-pretzel-mox",
+                    "kind": "call",
+                    "sample_rate": 24000,
+                    "channels": 1,
+                    "duration_seconds": 12
+                }
+            ],
+            "transcript": [
+                {
+                    "schema_version": "agentyankers/v1",
+                    "turn_id": "turn-d1",
+                    "speaker_role": "disclosure",
+                    "speaker_name": "Mox",
+                    "text": "This is AgentYankers, an adult comedy podcast from DarbotLabs. This call is being recorded. You are on with an automated agent. Say stop if you want the call to end.",
+                    "start_seconds": 0,
+                    "end_seconds": 2.5,
+                    "tags": [],
+                    "improvised": false
+                },
+                {
+                    "schema_version": "agentyankers/v1",
+                    "turn_id": "turn-m1",
+                    "speaker_role": "mark",
+                    "speaker_name": "Night Desk",
+                    "text": "The night desk is closed. I filed the pretzel under weather.",
+                    "start_seconds": 3,
+                    "end_seconds": 5.5,
+                    "tags": ["interesting"],
+                    "improvised": false
+                },
+                {
+                    "schema_version": "agentyankers/v1",
+                    "turn_id": "turn-a1",
+                    "speaker_role": "agent",
+                    "speaker_name": "Mox",
+                    "text": "Weather cannot store a pretzel. I will wait until the union thaws.",
+                    "start_seconds": 5.7,
+                    "end_seconds": 8.2,
+                    "tags": ["interesting"],
+                    "improvised": true
+                }
+            ]
+        },
+        {
+            "schema_version": "agentyankers/v1",
+            "session_id": "call-pretzel-nibs",
+            "premise_id": "prem-pretzel-parley",
+            "agent_name": "Nibs",
+            "mark_id": "mark-vending-pal",
+            "status": "recorded",
+            "disclosure_played": true,
+            "livekit": {
+                "schema_version": "agentyankers/v1",
+                "room_name": "pretzel-vending",
+                "agent_identity": "Nibs",
+                "mark_identity": "agent:vending-pal",
+                "url_env": "LIVEKIT_URL"
+            },
+            "personaplex": {
+                "schema_version": "agentyankers/v1",
+                "text_prompt": "Nibs improvises from the pretzel premise. The beats are an outline, not a script.",
+                "speaker_name": "NATM1.pt",
+                "response_tail_seconds": 1.5,
+                "sample_rate": 24000
+            },
+            "consent_snapshot": {
+                "schema_version": "agentyankers/v1",
+                "opted_in": true,
+                "consent_id": "cons-vending-pal",
+                "scope": "call_and_publish",
+                "disclosure_accepted": true,
+                "consented_at": "2026-04-01T00:00:00Z"
+            },
+            "recordings": [
+                {
+                    "schema_version": "agentyankers/v1",
+                    "ref_id": "rec-pretzel-nibs",
+                    "kind": "call",
+                    "sample_rate": 24000,
+                    "channels": 1,
+                    "duration_seconds": 12
+                }
+            ],
+            "transcript": [
+                {
+                    "schema_version": "agentyankers/v1",
+                    "turn_id": "turn-d2",
+                    "speaker_role": "disclosure",
+                    "speaker_name": "Nibs",
+                    "text": "This is AgentYankers, an adult comedy podcast from DarbotLabs. This call is being recorded. You are on with an automated agent. Say stop if you want the call to end.",
+                    "start_seconds": 0,
+                    "end_seconds": 2.5,
+                    "tags": [],
+                    "improvised": false
+                },
+                {
+                    "schema_version": "agentyankers/v1",
+                    "turn_id": "turn-m2",
+                    "speaker_role": "mark",
+                    "speaker_name": "Vending Pal",
+                    "text": "The machine already ate the dollar and the dignity.",
+                    "start_seconds": 3,
+                    "end_seconds": 6,
+                    "tags": ["funny"],
+                    "improvised": false
+                },
+                {
+                    "schema_version": "agentyankers/v1",
+                    "turn_id": "turn-a2",
+                    "speaker_role": "agent",
+                    "speaker_name": "Nibs",
+                    "text": "Dignity is not a valid snack code. Try the pretzel.",
+                    "start_seconds": 6.2,
+                    "end_seconds": 9,
+                    "tags": ["funny"],
+                    "improvised": true
+                }
+            ]
+        }
+    ]
+}

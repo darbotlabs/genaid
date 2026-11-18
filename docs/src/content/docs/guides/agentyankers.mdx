@@ -1,0 +1,50 @@
+---
+title: AgentYankers writing room
+sidebar:
+    order: 85
+description: Draft premise outlines, personas, host commentary, and show notes as agentyankers/v1 JSON.
+---
+
+AgentYankers is a DarbotLabs adult comedy podcast. LiveKit agents, voiced with PersonaPlex, call opted-in marks from a premise outline and improvise. The show layer replays highlights with host commentary, a VibeVoice voiceover, and podcast audio. GenAID Audio stitches the episode.
+
+That call, voice, and stitch pipeline lives in `genaid_audio.agentyankers` (`agentyankers/v1`). This repo is the writing room. It drafts the JSON that pipeline consumes. It does not vendor the private pipeline, place calls, or load voice models.
+
+## What gets written
+
+| Script | JSON | Core consumer |
+| --- | --- | --- |
+| `agentyankers-premise` | `PremiseOutline` | `load_premise` |
+| `agentyankers-personas` | `PersonaCast` | `load_personas` |
+| `agentyankers-commentary` | `HighlightClip` list and `CommentaryLine` list | `select_highlights`, VibeVoice plan |
+| `agentyankers-show-notes` | `ShowNotes` plus markdown | episode `show_notes.json` |
+
+Run them from `packages/sample` with one of the writing-room model aliases. `foundry` is Azure Foundry, `copilot` is GitHub Copilot, and `openwebui` is OpenWebUI through the LiteLLM alias in `genaid.config.json`.
+
+```bash
+node ../cli/built/genaid.cjs run agentyankers-premise --model foundry --vars brief="$(cat src/agentyankers/fixtures/brief.json)"
+node ../cli/built/genaid.cjs run agentyankers-personas --model copilot --vars brief="$(cat src/agentyankers/fixtures/cast-brief.json)"
+node ../cli/built/genaid.cjs run agentyankers-commentary --model openwebui src/agentyankers/fixtures/episode.json
+node ../cli/built/genaid.cjs run agentyankers-show-notes --model foundry src/agentyankers/fixtures/episode.json
+```
+
+`--vars offline=true` skips the model and writes the deterministic draft. That path is what the tests exercise. API keys stay in the environment (`OPENWEBUI_API_KEY`, `OPENWEBUI_API_BASE`, and the Azure and GitHub variables already used by GenAID). LiveKit and model weights stay in `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`, `GENAID_PERSONAPLEX_MODEL_BASE`, `GENAID_MODEL_BASE`, and `GENAID_VOICES_DIR`. The writing room stores those names, not their values.
+
+## Guardrails
+
+Every mark in a transcript needs `opted_in` and `consent.scope`. Commentary and show notes call `require_publish_consent`. A call plan uses `require_call_consent`. `call` can be dialed and not published. `publish` can be published and not dialed again. `call_and_publish` can do both. Missing opt-in refuses both.
+
+The recording disclosure is fixed:
+
+> This is AgentYankers, an adult comedy podcast from DarbotLabs. This call is being recorded. You are on with an automated agent. Say stop if you want the call to end.
+
+Commentary starts with that sentence. Show notes copy it. A model rewrite that changes the sentence is refused. Show notes list display name, kind, and consent id. They omit `contact_ref`. Marks are addressed by `agent:`, `lk-identity:`, or `room:` refs. Phone numbers are refused, and the error does not echo the match. The fixtures are fictional.
+
+Highlights follow the published rule: score improvised exchanges funny, then interesting, keep one strong exchange from each call, then fill remaining slots. Disclosure turns are not highlights. When `genaid_audio.agentyankers` imports, the writing room delegates `select_highlights`, `generate_commentary`, `require_call_consent`, `require_publish_consent`, `recording_disclosure`, and `export_json_schemas` through `packages/sample/src/agentyankers/adapter.py`. If the import fails, the local drafts still emit v1 JSON.
+
+## Tests
+
+```bash
+node --test packages/sample/src/agentyankers.test.mjs
+```
+
+The tests use the fake fixtures under `packages/sample/src/agentyankers/fixtures/` and a stand-in model callback. They do not call Azure, GitHub, OpenWebUI, or LiveKit.
