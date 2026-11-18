@@ -9,6 +9,9 @@
 import { AgentYankersError } from "./guardrails.mjs"
 import { validateHighlight, validateSession } from "./schema.mjs"
 
+/** HighlightClip.transcript_excerpt maxLength. Two full turns can exceed it. */
+const EXCERPT_MAX = 4000
+
 export function selectHighlights(sessions, marks, limit = 3) {
     if (!Number.isInteger(limit) || limit < 1)
         throw new AgentYankersError("limit must be at least 1", {
@@ -70,7 +73,7 @@ export function selectHighlights(sessions, marks, limit = 3) {
             mark_name: item.mark_name,
             start_seconds: item.start,
             end_seconds: item.end,
-            transcript_excerpt: item.excerpt,
+            transcript_excerpt: clipExcerpt(item.excerpt),
             score: item.score,
             reason: item.reason,
             recording_ref_id: item.recording_ref_id,
@@ -162,6 +165,11 @@ function rank(item) {
 
 function tie(a, b) {
     return a.start - b.start || a.session_id.localeCompare(b.session_id)
+}
+
+function clipExcerpt(value) {
+    const text = String(value || "")
+    return text.length <= EXCERPT_MAX ? text : text.slice(0, EXCERPT_MAX)
 }
 
 function uniqueTags(tags) {

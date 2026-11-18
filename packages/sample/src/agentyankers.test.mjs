@@ -89,6 +89,21 @@ describe("agentyankers writing room", () => {
         )
     })
 
+    test("long exchanges stay inside the highlight excerpt cap", async () => {
+        const session = structuredClone(episode.sessions[1])
+        const long = "a".repeat(4000)
+        session.transcript[1].text = long
+        session.transcript[2].text = long
+        const draft = await draftCommentary({
+            ...episode,
+            sessions: [session],
+            limit: 1,
+        })
+        assert.equal(draft.highlights.length, 1)
+        assert.equal(draft.highlights[0].transcript_excerpt.length, 4000)
+        assert.ok(draft.highlights[0].transcript_excerpt.startsWith("Vending Pal:"))
+    })
+
     test("a disclosure overlap is not a highlight", async () => {
         const session = structuredClone(episode.sessions[0])
         session.transcript[1].start_seconds = 1
