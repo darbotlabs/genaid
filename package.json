@@ -57,6 +57,7 @@
         "debug:mcp": "npx --yes @modelcontextprotocol/inspector node packages/cli/built/genaid.cjs mcp --groups mcp --cwd packages/sample --startup resources",
         "test:core": "cd packages/core && yarn test",
         "test:samples": "cd packages/sample && yarn test",
+        "test:agentyankers": "node --test packages/sample/src/agentyankers.test.mjs",
         "test:modulesamples": "cd packages/modulesample && yarn test",
         "test:cli": "node packages/cli/built/genaid.cjs run code-annotator packages/sample/src/counting.py -l Test -o .genaid/tmp/tests/cli -ot .genaid/tmp/tests/cli/outtrace.md -oa .genaid/tmp/tests/cli/diags.sarif",
         "test:live": "node packages/cli/built/genaid.cjs run code-annotator packages/sample/src/counting.py -l Test -o .genaid/tmp/tests/cli --retry 1 --temperature 0.5 ",
