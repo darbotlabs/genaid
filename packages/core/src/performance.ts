@@ -337,10 +337,21 @@ export function mark(name: string, metadata?: Record<string, any>): void {
 }
 
 /**
- * Measure duration between marks or from a mark to now
+ * Start an independent timer and return an idempotent completion callback
  */
-export function measure(name: string): void {
-    performanceMonitor.endTiming(name)
+export function measure(name: string, details?: unknown): (details?: unknown) => number {
+    const start = performance.now()
+    let duration: number | undefined
+    return (completionDetails?: unknown) => {
+        if (duration === undefined) {
+            duration = performance.now() - start
+            performanceMonitor.record(name, duration, undefined, {
+                details,
+                completionDetails,
+            })
+        }
+        return duration
+    }
 }
 
 /**
